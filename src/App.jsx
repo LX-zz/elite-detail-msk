@@ -206,7 +206,7 @@ export default function App() {
 
       <footer className="footer">© Elite Detail MSK</footer>
       <a
-        href="https://t.me/Alexander767777"
+        href="https://t.me/Style_touch_detail"
         className="tg-fab"
         target="_blank"
         rel="noopener noreferrer"
