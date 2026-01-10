@@ -198,7 +198,7 @@ export default function App() {
       <section id="contacts" className="section">
         <div className="container">
           <h2>Контакты</h2>
-          <p className="text">г. Москва, ул. Островитянова 53</p>
+          <p className="text">г. Москва, ул. Островитянова, 53</p>
           <p className="text">Ежедневно 10:00–22:00</p>
           <p className="text">+7 (926) 100-77-26</p>
         </div>
