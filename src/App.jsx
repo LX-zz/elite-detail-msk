@@ -1,26 +1,22 @@
 import { useEffect, useState } from "react";
+import { Routes, Route, Link } from "react-router-dom";
 import "./App.css";
+import Services from "./pages/Services.jsx";
 
-export default function App() {
+
+function Home() {
   const [accent, setAccent] = useState("#cfae70");
   const [menuOpen, setMenuOpen] = useState(false);
 
-  // lock body scroll when menu open (mobile)
   useEffect(() => {
-    if (menuOpen) document.body.classList.add("no-scroll");
-    else document.body.classList.remove("no-scroll");
-
+    document.body.classList.toggle("no-scroll", menuOpen);
     return () => document.body.classList.remove("no-scroll");
   }, [menuOpen]);
 
   const closeMenu = () => setMenuOpen(false);
 
-  const TG_LINK = "https://t.me/Style_touch_detail"; // <-- поменяй на свой
-  const PHONE = "+79261007726";
-  const PHONE_VIEW = "+7 (926) 100-77-26";
-
   return (
-    <div className="app" id="top" style={{ "--accent": accent }}>
+    <div className="app" style={{ "--accent": accent }}>
       {/* HEADER */}
       <header className="header">
         <a className="logo" href="#top" onClick={closeMenu}>
@@ -31,13 +27,13 @@ export default function App() {
           <a href="#services">Услуги</a>
           <a href="#about">О нас</a>
           <a href="#contacts">Контакты</a>
+          <Link className="nav-link" to="/services">Все услуги</Link>
         </nav>
 
         <button
           className={`burger ${menuOpen ? "is-open" : ""}`}
           onClick={() => setMenuOpen((v) => !v)}
-          aria-label="Открыть меню"
-          aria-expanded={menuOpen}
+          aria-label="Меню"
         >
           <span />
           <span />
@@ -46,69 +42,63 @@ export default function App() {
       </header>
 
       {/* MOBILE MENU */}
-      <div
-        className={`menu-overlay ${menuOpen ? "is-open" : ""}`}
-        onClick={closeMenu}
-      />
+<div
+  className={`menu-overlay ${menuOpen ? "is-open" : ""}`}
+  onClick={closeMenu}
+/>
 
-      <aside className={`mobile-menu ${menuOpen ? "is-open" : ""}`}>
-        <div className="mobile-menu__head">
-          <div className="mobile-menu__title">Меню</div>
-          <button className="mobile-menu__close" onClick={closeMenu}>
-            ✕
-          </button>
-        </div>
+<aside className={`mobile-menu ${menuOpen ? "is-open" : ""}`}>
+  <div className="mobile-menu__head">
+    <div className="mobile-menu__title">Меню</div>
+    <button className="mobile-menu__close" onClick={closeMenu}>
+      ✕
+    </button>
+  </div>
 
-        <nav className="nav nav--mobile">
-          <a href="#services" onClick={closeMenu}>
-            Услуги
-          </a>
-          <a href="#about" onClick={closeMenu}>
-            О нас
-          </a>
-          <a href="#contacts" onClick={closeMenu}>
-            Контакты
-          </a>
-        </nav>
+  {/* ОСНОВНОЕ МЕНЮ */}
+  <nav className="nav nav--mobile" onClick={closeMenu}>
+    <a href="#services">Услуги</a>
+    <a href="#about">О нас</a>
+    <a href="#contacts">Контакты</a>
+    <Link to="/services">Все услуги</Link>
+  </nav>
 
-        {/* MINI FOOTER INSIDE BURGER */}
-        <div className="mobile-menu__mini-footer">
-          <div className="mm-brand">
-            ELITE DETAIL <span>MSK</span>
-          </div>
+  {/* MINI FOOTER */}
+  <div className="mobile-mini-footer">
+    <div className="mobile-mini-footer__brand">
+      ELITE DETAIL <span>MSK</span>
+    </div>
 
-          <div className="mm-meta">
-            <span>Москва</span>
-            <span className="dot">•</span>
-            <a href={`tel:${PHONE}`} className="mm-link" onClick={closeMenu}>
-              {PHONE_VIEW}
-            </a>
-          </div>
+    <a
+      className="mobile-mini-footer__tel"
+      href="tel:+79261007726"
+    >
+      +7 (926) 100-77-26
+    </a>
 
-          <a
-            className="mm-cta"
-            href={TG_LINK}
-            target="_blank"
-            rel="noreferrer"
-            onClick={closeMenu}
-          >
-            Telegram
-          </a>
-        
-        </div>
-      </aside>
+    <a
+      className="mobile-mini-footer__tg"
+      href="https://t.me/EliteDetail"
+      target="_blank"
+      rel="noreferrer"
+    >
+      Telegram
+    </a>
+  </div>
+</aside>
+
 
       {/* HERO */}
-      <section className="hero">
-        <div className="hero-line" />
+      <section id="top" className="hero">
+        <div className="hero-line"></div>
         <h1 className="hero-title">
           ELITE DETAIL <span>MSK</span>
         </h1>
         <h2 className="hero-subtitle">Премиальный детейлинг автомобилей</h2>
 
-        {/* CTA → Telegram */}
-        <a className="btn btn-solid" href={TG_LINK} target="_blank" rel="noreferrer">
-          Записаться
+        {/* кнопка сразу в Telegram */}
+        <a className="btn btn-solid" href="https://t.me/EliteDetail" target="_blank" rel="noreferrer">
+          Записаться в Telegram
         </a>
       </section>
 
@@ -117,7 +107,7 @@ export default function App() {
         <div className="container">
           <div className="section-head section-head--center">
             <h2>Услуги</h2>
-            <div className="section-line" />
+            <div className="section-line"></div>
           </div>
 
           <div className="services-grid">
@@ -132,89 +122,30 @@ export default function App() {
             </div>
 
             <div className="service-tile">
-              <div className="service-title">Оклейка плёнками</div>
-              <div className="service-tag">Обновление внешности без покраски</div>
+              <div className="service-title">Бронирование лобового</div>
+              <div className="service-tag">Прозрачная плёнка Never Scratch</div>
+            </div>
+
+            <div className="service-tile">
+              <div className="service-title">Полировка кузова</div>
+              <div className="service-tag">Глубина цвета и блеск</div>
+            </div>
+
+            <div className="service-tile">
+              <div className="service-title">Керамика</div>
+              <div className="service-tag">Долговременная защита и гидрофоб</div>
             </div>
 
             <div className="service-tile">
               <div className="service-title">PDR</div>
               <div className="service-tag">Удаление вмятин без покраски</div>
             </div>
-
-            <div className="service-tile">
-              <div className="service-title">Полировка + антидождь</div>
-              <div className="service-tag">Сияние, которое заметят все</div>
-            </div>
-
-            <div className="service-tile">
-              <div className="service-title">Керамика кузова и салона</div>
-              <div className="service-tag">Глянец и долговременная защита</div>
-            </div>
           </div>
 
           <div className="services-cta">
-            <a href="#all-services" className="btn btn-solid">
+            <Link to="/services" className="btn btn-solid">
               Все услуги
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* ALL SERVICES */}
-      <section id="all-services" className="all-services bg-steel">
-        <div className="container">
-          <div className="section-head section-head--center">
-            <h2>Все услуги</h2>
-            <div className="section-line" />
-          </div>
-
-          <div className="all-services-grid">
-            <div className="service-card">
-              <h3>Защита</h3>
-              <ul className="service-list">
-                <li>Антигравийная плёнка</li>
-                <li>Бронь лобового стекла</li>
-                <li>Керамика кузова и салона</li>
-              </ul>
-            </div>
-
-            <div className="service-card">
-              <h3>Внешний вид</h3>
-              <ul className="service-list">
-                <li>Тонировка</li>
-                <li>Оклейка плёнками</li>
-                <li>Полировка + антидождь</li>
-                <li>Покраска дисков</li>
-              </ul>
-            </div>
-
-            <div className="service-card">
-              <h3>Ремонт и восстановление</h3>
-              <ul className="service-list">
-                <li>PDR — удаление вмятин</li>
-                <li>Замена лобового стекла</li>
-                <li>Ремонт передней оптики</li>
-              </ul>
-            </div>
-
-            <div className="service-card">
-              <h3>Интерьер</h3>
-              <ul className="service-list">
-                <li>Химчистка + озонирование</li>
-                <li>Перешив руля</li>
-                <li>Шумоизоляция и антискрип</li>
-              </ul>
-            </div>
-
-            <div className="service-card service-card--wide">
-              <h3>Индивидуальные проекты</h3>
-              <ul className="service-list service-list--cols">
-                <li>Стайлинг / антихром</li>
-                <li>Винилография</li>
-                <li>Тюнинг и установка обвесов</li>
-                <li>Наклейки / плоттерная резка</li>
-              </ul>
-            </div>
+            </Link>
           </div>
         </div>
       </section>
@@ -236,14 +167,12 @@ export default function App() {
           <h2>Контакты</h2>
           <p className="text">г. Москва, ул. Островитянова,53</p>
           <p className="text">Ежедневно 10:00–22:00</p>
-
-          <a className="contact-link" href={`tel:${PHONE}`}>
-            {PHONE_VIEW}
-          </a>
+          <p className="text">
+            <a className="footer-link" href="tel:+79261007726">+7 (926) 100-77-26</a>
+          </p>
         </div>
       </section>
 
-      {/* FOOTER */}
       <footer className="footer-min">
         <div className="footer-inner">
           <div className="footer-brand">
@@ -251,20 +180,26 @@ export default function App() {
           </div>
 
           <div className="footer-meta">
-            <span>Москва</span>
-            <span className="dot">•</span>
-            <a className="footer-link" href={`tel:${PHONE}`}>
-              {PHONE_VIEW}
-            </a>
+            Москва <span className="dot">•</span>{" "}
+            <a className="footer-link" href="tel:+79261007726">+7 (926) 100-77-26</a>
           </div>
 
-          <a className="footer-cta" href={TG_LINK} target="_blank" rel="noreferrer">
+          <a className="footer-cta" href="https://t.me/EliteDetail" target="_blank" rel="noreferrer">
             Telegram
           </a>
 
-          <div className="footer-copy">© {new Date().getFullYear()} Elite Detail MSK</div>
+          <div className="footer-copy">© 2026 Elite Detail MSK</div>
         </div>
       </footer>
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/services" element={<Services />} />
+    </Routes>
   );
 }
