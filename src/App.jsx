@@ -5,21 +5,6 @@ export default function App() {
   const [accent, setAccent] = useState("#cfae70");
   const [menuOpen, setMenuOpen] = useState(false);
 
-  // show Telegram FAB only after scroll
-  useEffect(() => {
-    const onScroll = () => {
-      if (window.scrollY > window.innerHeight * 0.6) {
-        document.body.classList.add("scrolled");
-      } else {
-        document.body.classList.remove("scrolled");
-      }
-    };
-
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
   // lock body scroll when menu open (mobile)
   useEffect(() => {
     if (menuOpen) document.body.classList.add("no-scroll");
@@ -29,6 +14,10 @@ export default function App() {
   }, [menuOpen]);
 
   const closeMenu = () => setMenuOpen(false);
+
+  const TG_LINK = "https://t.me/Style_touch_detail"; // <-- поменяй на свой
+  const PHONE = "+79261007726";
+  const PHONE_VIEW = "+7 (926) 100-77-26";
 
   return (
     <div className="app" id="top" style={{ "--accent": accent }}>
@@ -81,6 +70,32 @@ export default function App() {
             Контакты
           </a>
         </nav>
+
+        {/* MINI FOOTER INSIDE BURGER */}
+        <div className="mobile-menu__mini-footer">
+          <div className="mm-brand">
+            ELITE DETAIL <span>MSK</span>
+          </div>
+
+          <div className="mm-meta">
+            <span>Москва</span>
+            <span className="dot">•</span>
+            <a href={`tel:${PHONE}`} className="mm-link" onClick={closeMenu}>
+              {PHONE_VIEW}
+            </a>
+          </div>
+
+          <a
+            className="mm-cta"
+            href={TG_LINK}
+            target="_blank"
+            rel="noreferrer"
+            onClick={closeMenu}
+          >
+            Telegram
+          </a>
+        
+        </div>
       </aside>
 
       {/* HERO */}
@@ -92,7 +107,7 @@ export default function App() {
         <h2 className="hero-subtitle">Премиальный детейлинг автомобилей</h2>
 
         {/* CTA → Telegram */}
-        <a className="btn btn-solid" href="https://t.me/Style_touch_detail" target="_blank" rel="noreferrer">
+        <a className="btn btn-solid" href={TG_LINK} target="_blank" rel="noreferrer">
           Записаться
         </a>
       </section>
@@ -222,13 +237,13 @@ export default function App() {
           <p className="text">г. Москва, ул. Островитянова,53</p>
           <p className="text">Ежедневно 10:00–22:00</p>
 
-          <a className="contact-link" href="tel:+79261007726">
-            +7 (926) 100-77-26
+          <a className="contact-link" href={`tel:${PHONE}`}>
+            {PHONE_VIEW}
           </a>
-          </div>
+        </div>
       </section>
 
-      {/* FOOTER minimal */}
+      {/* FOOTER */}
       <footer className="footer-min">
         <div className="footer-inner">
           <div className="footer-brand">
@@ -238,30 +253,18 @@ export default function App() {
           <div className="footer-meta">
             <span>Москва</span>
             <span className="dot">•</span>
-            <a className="footer-link" href="tel:+79261007726">
-              +7 (926) 100-77-26
+            <a className="footer-link" href={`tel:${PHONE}`}>
+              {PHONE_VIEW}
             </a>
           </div>
 
-          <a className="footer-cta" href="https://t.me/Style_touch_detail" target="_blank" rel="noreferrer">
+          <a className="footer-cta" href={TG_LINK} target="_blank" rel="noreferrer">
             Telegram
           </a>
 
           <div className="footer-copy">© {new Date().getFullYear()} Elite Detail MSK</div>
         </div>
       </footer>
-
-      {/* Telegram floating button (shows after scroll) */}
-      <a
-        className="tg-fab"
-        href="https://t.meStyle_touch_detail"
-        target="_blank"
-        rel="noreferrer"
-        aria-label="Написать в Telegram"
-      >
-        <span className="tg-fab-ic">✈</span>
-        <span className="tg-fab-txt">Telegram</span>
-      </a>
     </div>
   );
 }
