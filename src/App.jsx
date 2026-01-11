@@ -81,17 +81,6 @@ export default function App() {
             Контакты
           </a>
         </nav>
-
-        <div className="mobile-menu__foot">
-          <div className="mobile-menu__mini">Акцент</div>
-          <input
-            className="accent-input"
-            type="color"
-            value={accent}
-            onChange={(e) => setAccent(e.target.value)}
-            aria-label="Цвет акцента"
-          />
-        </div>
       </aside>
 
       {/* HERO */}
