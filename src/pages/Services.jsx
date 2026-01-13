@@ -17,7 +17,6 @@ function ServiceItem({ id, title, text, openId, setOpenId }) {
         <span className="svc-plus">{isOpen ? "—" : "+"}</span>
       </button>
 
-      {/* НЕ hidden — иначе анимации не будет */}
       <div id={bodyId} className="svc-body">
         <div className="svc-body__inner">
           <p>{text}</p>
@@ -27,9 +26,8 @@ function ServiceItem({ id, title, text, openId, setOpenId }) {
   );
 }
 
-
 export default function Services() {
-  const [openId, setOpenId] = useState(0); // первый открыт, можешь поставить null если не надо
+  const [openId, setOpenId] = useState(0);
 
   const services = useMemo(
     () => [
@@ -99,7 +97,6 @@ export default function Services() {
 
   return (
     <div className="app">
-      {/* Шапка должна быть фиксированной и такой же как на главной */}
       <header className="header">
         <Link className="logo" to="/">
           ELITE DETAIL <span>MSK</span>
@@ -111,8 +108,6 @@ export default function Services() {
           <Link className="nav-link" to="/#contacts">Контакты</Link>
           <Link className="nav-link" to="/services">Все услуги</Link>
         </nav>
-
-        {/* если у тебя бургер уже сделан в Home, можно позже дотащить сюда, но пока оставим так */}
       </header>
 
       <section className="services-page bg-steel">
@@ -148,29 +143,48 @@ export default function Services() {
           </div>
         </div>
       </section>
+
       <footer className="footer-min">
-  <div className="footer-inner">
-    <div className="footer-brand">
-      ELITE DETAIL <span>MSK</span>
-    </div>
+        <div className="footer-inner">
+          <div className="footer-brand">
+            ELITE DETAIL <span>MSK</span>
+          </div>
 
-    <div className="footer-meta">
-      Москва <span className="dot">•</span> +7 (926) 100-77-26
-    </div>
+          <div className="footer-meta">
+            Москва <span className="dot">•</span>{" "}
+            <a className="footer-link" href="tel:+79261007726">
+              +7 (926) 100-77-26
+            </a>
+          </div>
 
-    <a
-      className="footer-cta"
-      href="https://t.me/EliteDetail"
-      target="_blank"
-      rel="noreferrer"
-    >
-      TELEGRAM
-    </a>
-
-    <div className="footer-copy">© 2026 Elite Detail MSK</div>
-  </div>
-</footer>
-
+          <div className="footer-actions">
+            <a
+              href="https://www.avito.ru/brands/314b5bc4c521ab6778a3813b3db3ae41?src=sharing"
+              className="footer-cta footer-cta--avito"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Avito
+            </a>
+            <a
+              href="https://t.me/+aFCEBk5m3ToxMjEy"
+              className="footer-cta footer-cta--channel"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Telegram канал
+            </a>
+            <a
+              href="https://t.me/EliteDetail"
+              className="footer-cta"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Telegram
+            </a>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
